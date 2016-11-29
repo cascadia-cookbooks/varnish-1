@@ -42,6 +42,7 @@ template '/etc/init.d/varnish' do
     mode     0755
     backup   5
     action   :create
+    not_if  'pidof systemd'
     notifies :restart, 'service[varnish]', :delayed
 end
 
