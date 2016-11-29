@@ -9,8 +9,8 @@ This cookbook will install and configure Varnish, a high-performance HTTP accele
 - Chef '>= 12.5'
 
 ## Attributes
-* `default['varnish']['ip'] = '127.0.0.1'` The interface Varnish will bind to.  This will usually be your public IP address.
-* `default['varnish']['port'] = '80'` The port Varnish will listen on.
+* `default['varnish']['frontend']['ip'] = '127.0.0.1'` The interface Varnish will bind to.  This will usually be your public IP address.
+* `default['varnish']['frontend']['port'] = '80'` The port Varnish will listen on.
 * `default['varnish']['backend']['ip'] = '127.0.0.1'` The IP address of your content server.
 * `default['varnish']['backend']['port'] = '8080'` The port of your content server.
 * `default['varnish']['admin']['ip'] = '127.0.0.1'` The interface Varnish admin will bind to.
@@ -30,11 +30,16 @@ description 'this will install varnish'
 override_attributes(
     ...
     'varnish' => {
-        'ip'   => '192.168.0.666',
-        'port' => 80,
+        'frontend' => {
+            'ip'   => '192.168.0.666',
+            'port' => 80,
+        },
         'backend' => {
             'ip'   => '127.0.0.1',
             'port' => 666
+        },
+        'cache' => {
+            'size' => '2G'
         }
     },
     ...

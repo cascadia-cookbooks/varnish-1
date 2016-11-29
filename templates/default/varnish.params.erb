@@ -9,8 +9,8 @@ VARNISH_VCL_CONF=/etc/varnish/default.vcl
 # Default address and port to bind to. Blank address means all IPv4
 # and IPv6 interfaces, otherwise specify a host name, an IPv4 dotted
 # quad, or an IPv6 address in brackets.
-VARNISH_LISTEN_ADDRESS=<%= node['varnish']['ip'] %>
-VARNISH_LISTEN_PORT=<%= node['varnish']['port'] %>
+VARNISH_LISTEN_ADDRESS=<%= node['varnish']['frontend']['ip'] %>
+VARNISH_LISTEN_PORT=<%= node['varnish']['frontend']['port'] %>
 
 # Admin interface listen address and port
 VARNISH_ADMIN_LISTEN_ADDRESS=<%= node['varnish']['admin']['ip'] %>

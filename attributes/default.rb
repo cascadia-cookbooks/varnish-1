@@ -4,8 +4,8 @@ default['varnish']['packages'] = %w(varnish)
 default['varnish']['version'] = '4.1.3'
 
 # default address and port to bind to
-default['varnish']['ip']   = '127.0.0.1'
-default['varnish']['port'] = '80'
+default['varnish']['frontend']['ip']   = '127.0.0.1'
+default['varnish']['frontend']['port'] = '80'
 
 # set this to point to your content server
 default['varnish']['backend']['ip']   = '127.0.0.1'
