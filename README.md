@@ -1,5 +1,5 @@
 # varnish Cookbook
-This cookbook will install and configure varnish.
+This cookbook will install and configure Varnish, a high-performance HTTP accelerator.
 
 ### Platforms
 - Ubuntu, Debian
@@ -9,9 +9,13 @@ This cookbook will install and configure varnish.
 - Chef '>= 12.5'
 
 ## Attributes
-You can set custom version via the `version` attribute.
-
-`default['varnish']['version'] = 'version'`
+* `default['varnish']['ip'] = '127.0.0.1'` The interface Varnish will bind to.  This will usually be your public IP address.
+* `default['varnish']['port'] = '80'` The port Varnish will listen on.
+* `default['varnish']['backend']['ip'] = '127.0.0.1'` The IP address of your content server.
+* `default['varnish']['backend']['port'] = '8080'` The port of your content server.
+* `default['varnish']['admin']['ip'] = '127.0.0.1'` The interface Varnish admin will bind to.
+* `default['varnish']['admin']['port'] = '6082'` The port Varnish admin will listen on.
+* `default['varnish']['version'] = '4.1.3'` Changes the version to install. You shouldn't need to change this.
 
 ## Usage
 Including the `cop_varnish` cookbook in the run_list ensures that varnish
@@ -21,7 +25,18 @@ service will be installed.
 name 'varnish'
 description 'this will install varnish'
 
-override_attributes()
+override_attributes(
+    ...
+    'varnish' => {
+        'ip'   => '192.168.0.666',
+        'port' => 80,
+        'backend' => {
+            'ip'   => '127.0.0.1',
+            'port' => 666
+        }
+    },
+    ...
+)
 
 run_list(
     'recipe[cop_varnish::default]'
