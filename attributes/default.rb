@@ -14,8 +14,11 @@ default['varnish']['backend']['port'] = '8080'
 default['varnish']['admin']['ip']   = '127.0.0.1'
 default['varnish']['admin']['port'] = '6082'
 
-case node['platform']
-when 'ubuntu', 'debian'
+default['varnish']['cache']['file'] = '/var/lib/varnish/varnish_storage.bin'
+default['varnish']['cache']['size'] = '200M'
+
+case node['platform_family']
+when 'debian'
     default['varnish']['dependencies'] = %w(
         automake
         autotools-dev

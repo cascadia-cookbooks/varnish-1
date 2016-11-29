@@ -16,6 +16,8 @@ This cookbook will install and configure Varnish, a high-performance HTTP accele
 * `default['varnish']['admin']['ip'] = '127.0.0.1'` The interface Varnish admin will bind to.
 * `default['varnish']['admin']['port'] = '6082'` The port Varnish admin will listen on.
 * `default['varnish']['version'] = '4.1.3'` Changes the version to install. You shouldn't need to change this.
+* `default['varnish']['cache']['file'] = '...'` The file Varnish will save data to. You shouldn't need to change this.
+* `default['varnish']['cache']['size'] = '200M'` The size limit of the Varnish cache file. Increase to save more data. Use a string in bytes, optionally using k / M / G / T suffix.
 
 ## Usage
 Including the `cop_varnish` cookbook in the run_list ensures that varnish

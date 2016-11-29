@@ -19,9 +19,16 @@ VARNISH_ADMIN_LISTEN_PORT=<%= node['varnish']['admin']['port'] %>
 # Shared secret file for admin interface
 VARNISH_SECRET_FILE=/etc/varnish/secret
 
+# Cache file location
+VARNISH_STORAGE_FILE=<%= node['varnish']['cache']['file'] %>
+
+# Cache file size: in bytes, optionally using k / M / G / T suffix,
+# or in percentage of available disk space using the % suffix.
+VARNISH_STORAGE_SIZE=<%= node['varnish']['cache']['size'] %>
+
 # Backend storage specification, see Storage Types in the varnishd(5)
 # man page for details.
-VARNISH_STORAGE="file,/var/lib/varnish/varnish_storage.bin,1G"
+VARNISH_STORAGE="file,${VARNISH_STORAGE_FILE},${VARNISH_STORAGE_SIZE}"
 
 # Default TTL used when the backend does not specify one
 VARNISH_TTL=120
