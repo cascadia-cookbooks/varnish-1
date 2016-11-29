@@ -25,5 +25,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+include_recipe 'cop_varnish::dependencies'
 include_recipe 'cop_varnish::install'
 include_recipe 'cop_varnish::configure'

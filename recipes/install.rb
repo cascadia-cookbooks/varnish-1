@@ -9,18 +9,6 @@ varnish  = "varnish-#{node['varnish']['version']}"
 tarball  = "#{varnish}.tar.gz"
 download = "http://repo.varnish-cache.org/source/#{tarball}"
 
-case node['platform']
-when 'ubuntu', 'debian'
-    include_recipe 'apt::default'
-when 'centos', 'rhel'
-end
-
-node['varnish']['dependencies'].each do |p|
-    package p do
-        action :install
-    end
-end
-
 remote_file 'download varnish' do
     path   "#{cache}/#{tarball}"
     source download

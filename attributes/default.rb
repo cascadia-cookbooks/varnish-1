@@ -32,9 +32,8 @@ when 'debian'
         python-sphinx
         graphviz
     )
-when 'centos', 'rhel'
+when 'rhel', 'fedora'
     default['varnish']['dependencies'] = %w(
-        epel-release
         autoconf
         automake
         jemalloc-devel
