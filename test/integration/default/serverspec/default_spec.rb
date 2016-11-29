@@ -37,4 +37,14 @@ describe 'cop_varnish::default' do
   describe service('varnish') do
     it { should be_running }
   end
+
+  # varnish default
+  describe port(80) do
+    it { should be_listening.with('tcp') }
+  end
+
+  # varnish admin
+  describe port(6082) do
+    it { should be_listening.with('tcp') }
+  end
 end
