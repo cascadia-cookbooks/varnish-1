@@ -1,4 +1,16 @@
 default['varnish']['packages'] = %w(varnish)
+default['varnish']['version'] = '4.1.3'
+
+# default address and port to bind to
+default['varnish']['ip']   = '127.0.0.1'
+default['varnish']['port'] = '80'
+
+# set this to point to your content server
+default['varnish']['backend']['ip']   = '127.0.0.1'
+default['varnish']['backend']['port'] = '8080'
+
+default['varnish']['admin']['ip']   = '127.0.0.1'
+default['varnish']['admin']['port'] = '6082'
 
 case node['platform']
 when 'ubuntu', 'debian'
@@ -15,7 +27,6 @@ when 'ubuntu', 'debian'
         python-sphinx
         graphviz
     )
-    default['varnish']['version'] = '4.1.3-*'
 when 'centos', 'rhel'
     default['varnish']['dependencies'] = %w(
         epel-release
@@ -31,5 +42,4 @@ when 'centos', 'rhel'
         python-sphinx
         graphviz
     )
-    default['varnish']['version'] = '4.0.3-*'
 end

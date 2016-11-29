@@ -5,7 +5,7 @@
 #
 
 cache    = Chef::Config[:file_cache_path]
-varnish  = "varnish-4.1.3"
+varnish  = "varnish-#{node['varnish']['version']}"
 tarball  = "#{varnish}.tar.gz"
 download = "http://repo.varnish-cache.org/source/#{tarball}"
 

@@ -6,8 +6,8 @@
 vcl 4.0;
 
 backend default {
-    .host = "127.0.0.1";
-    .port = "8080";
+    .host = "<%= node['varnish']['backend']['ip'] %>";
+    .port = "<%= node['varnish']['backend']['port'] %>";
 }
 
 sub vcl_recv {
