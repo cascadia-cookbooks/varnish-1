@@ -4,6 +4,7 @@ This cookbook will install and configure Varnish, a high-performance HTTP accele
 ### Platforms
 - Ubuntu, Debian
 - CentOS, RHEL
+- Fedora
 
 ### Chef
 - Chef '>= 12.5'
