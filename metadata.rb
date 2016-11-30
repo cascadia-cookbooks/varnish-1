@@ -12,5 +12,6 @@ issues_url 'https://github.com/copious-cookbooks/varnish/issues'
 supports 'ubuntu'
 supports 'rhel'
 supports 'centos'
+supports 'fedora'
 
 depends 'apt'
