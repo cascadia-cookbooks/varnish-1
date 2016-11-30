@@ -1,17 +1,24 @@
 # varnish Cookbook
-This cookbook will install and configure varnish.
+This cookbook will install and configure Varnish, a high-performance HTTP accelerator.
 
 ### Platforms
 - Ubuntu, Debian
 - CentOS, RHEL
+- Fedora
 
 ### Chef
 - Chef '>= 12.5'
 
 ## Attributes
-You can set custom version via the `version` attribute.
-
-`default['varnish']['version'] = 'version'`
+* `default['varnish']['frontend']['ip'] = '127.0.0.1'` The interface Varnish will bind to.  This will usually be your public IP address.
+* `default['varnish']['frontend']['port'] = '80'` The port Varnish will listen on.
+* `default['varnish']['backend']['ip'] = '127.0.0.1'` The IP address of your content server.
+* `default['varnish']['backend']['port'] = '8080'` The port of your content server.
+* `default['varnish']['admin']['ip'] = '127.0.0.1'` The interface Varnish admin will bind to.
+* `default['varnish']['admin']['port'] = '6082'` The port Varnish admin will listen on.
+* `default['varnish']['version'] = '4.1.3'` Changes the version to install. You shouldn't need to change this.
+* `default['varnish']['cache']['file'] = '...'` The file Varnish will save data to. You shouldn't need to change this.
+* `default['varnish']['cache']['size'] = '200M'` The size limit of the Varnish cache file. Increase to save more data. Use a string in bytes, optionally using k / M / G / T suffix.
 
 ## Usage
 Including the `cop_varnish` cookbook in the run_list ensures that varnish
@@ -21,7 +28,23 @@ service will be installed.
 name 'varnish'
 description 'this will install varnish'
 
-override_attributes()
+override_attributes(
+    ...
+    'varnish' => {
+        'frontend' => {
+            'ip'   => '192.168.0.666',
+            'port' => 80,
+        },
+        'backend' => {
+            'ip'   => '127.0.0.1',
+            'port' => 666
+        },
+        'cache' => {
+            'size' => '2G'
+        }
+    },
+    ...
+)
 
 run_list(
     'recipe[cop_varnish::default]'
@@ -68,55 +91,3 @@ $ kitchen test
 
 ## Notes
 * The `Berksfile.lock` file has been purposely omitted, as we don't care about upstream dependencies.
-
-Files installed on CentOS/RHEL
-```
-[vagrant@default-centos-72 ~]$ rpm -ql varnish | egrep -v 'bin|share'
-/etc/logrotate.d/varnish
-/etc/varnish
-/etc/varnish/default.vcl
-/etc/varnish/varnish.params
-/usr/lib/systemd/system/varnish.service
-/usr/lib/systemd/system/varnishlog.service
-/usr/lib/systemd/system/varnishncsa.service
-/var/lib/varnish
-/var/log/varnish
-```
-
-Files installed on Ubuntu/Debian
-```
-vagrant@default-ubuntu-1404:~$ dpkg-query -L varnish | egrep -v 'share|bin'
-/.
-/etc
-/etc/init.d
-/etc/init.d/varnishlog
-/etc/init.d/varnishncsa
-/etc/init.d/varnish
-/etc/logrotate.d
-/etc/logrotate.d/varnish
-/etc/varnish
-/etc/varnish/default.vcl
-/etc/default
-/etc/default/varnishlog
-/etc/default/varnishncsa
-/etc/default/varnish
-/lib
-/lib/systemd
-/lib/systemd/system
-/lib/systemd/system/varnish.service
-/lib/systemd/system/varnishncsa.service
-/lib/systemd/system/varnishlog.service
-/var
-/var/log
-/var/log/varnish
-/usr
-/usr/lib
-/usr/lib/varnish
-/usr/lib/varnish/libvarnishcompat.so
-/usr/lib/varnish/libvarnish.so
-/usr/lib/varnish/libvgz.so
-/usr/lib/varnish/vmods
-/usr/lib/varnish/vmods/libvmod_directors.so
-/usr/lib/varnish/vmods/libvmod_std.so
-/usr/lib/varnish/libvcc.so
-```

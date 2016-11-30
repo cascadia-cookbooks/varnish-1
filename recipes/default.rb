@@ -25,24 +25,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-case node['platform']
-when 'ubuntu', 'debian'
-    # TODO: remove apt dependency
-    apt_repository 'varnish-cache' do
-        uri          'https://repo.varnish-cache.org/ubuntu/'
-        distribution node['lsb']['codename']
-        components   ['varnish-4.1']
-        key          'https://repo.varnish-cache.org/GPG-key.txt'
-    end
-
-    include_recipe 'apt::default'
-when 'centos', 'rhel'
-    package 'epel-release' do
-        action :install
-    end
-end
-
-package 'varnish' do
-    action  :upgrade
-    version node['varnish']['version']
-end
+include_recipe 'cop_varnish::dependencies'
+include_recipe 'cop_varnish::install'
+include_recipe 'cop_varnish::configure'

@@ -1,0 +1,36 @@
+# Chef generated file. Edits will be lost.
+# Enviroment variables may be found in /etc/varnish/varnish.params
+
+[Unit]
+Description=Varnish a high-performance HTTP accelerator
+After=syslog.target network.target
+
+[Service]
+# Maximum number of open files (for ulimit -n)
+LimitNOFILE=131072
+
+# Locked shared memory (for ulimit -l)
+# Default log size is 82MB + header
+LimitMEMLOCK=82000
+
+# Maximum size of the corefile.
+LimitCORE=infinity
+
+EnvironmentFile=/etc/varnish/varnish.params
+
+Type=forking
+PIDFile=/var/run/varnish.pid
+PrivateTmp=true
+ExecStartPre=/usr/local/sbin/varnishd -C -f $VARNISH_VCL_CONF
+ExecStart=/usr/local/sbin/varnishd \
+        -P /var/run/varnish.pid \
+        -f $VARNISH_VCL_CONF \
+        -a ${VARNISH_LISTEN_ADDRESS}:${VARNISH_LISTEN_PORT} \
+        -T ${VARNISH_ADMIN_LISTEN_ADDRESS}:${VARNISH_ADMIN_LISTEN_PORT} \
+        -t $VARNISH_TTL \
+        -S $VARNISH_SECRET_FILE \
+        -s $VARNISH_STORAGE \
+        $DAEMON_OPTS
+
+[Install]
+WantedBy=multi-user.target
