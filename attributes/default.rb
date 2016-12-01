@@ -32,7 +32,7 @@ when 'debian'
         python-sphinx
         graphviz
     )
-when 'rhel', 'fedora'
+when 'rhel'
     default['varnish']['dependencies'] = %w(
         autoconf
         automake

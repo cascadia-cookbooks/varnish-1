@@ -2,9 +2,12 @@
 This cookbook will install and configure Varnish, a high-performance HTTP accelerator.
 
 ### Platforms
-- Ubuntu, Debian
-- CentOS, RHEL
-- Fedora
+* ubuntu/xenial64
+* ubuntu/trusty64
+* centos/7
+* centos/6
+* debian/jessie64
+* debian/wheezy64
 
 ### Chef
 - Chef '>= 12.5'
