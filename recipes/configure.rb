@@ -42,7 +42,7 @@ template '/etc/init.d/varnish' do
     mode     0755
     backup   5
     action   :create
-    not_if  'pidof systemd'
+    not_if  '[ "$(ps -p 1 -o comm=)" == systemd ]'
     notifies :restart, 'service[varnish]', :delayed
 end
 
@@ -54,7 +54,7 @@ template '/etc/systemd/system/varnish.service' do
     mode     0644
     backup   5
     action   :create
-    only_if  'pidof systemd'
+    only_if  '[ "$(ps -p 1 -o comm=)" == systemd ]'
     notifies :restart, 'service[varnish]', :delayed
 end
 
