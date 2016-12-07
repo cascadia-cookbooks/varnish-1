@@ -30,4 +30,4 @@ VARNISH_STORAGE="file,<%= node['varnish']['cache']['file'] %>,<%= node['varnish'
 VARNISH_TTL=120
 
 # Other options, see the man page varnishd(1)
-#DAEMON_OPTS="-p thread_pool_min=5 -p thread_pool_max=500 -p thread_pool_timeout=300"
+DAEMON_OPTS="-p thread_pool_min=<%= node['varnish']['thread_pool_min'] %> -p thread_pool_max=<%= node['varnish']['thread_pool_max'] %> -p thread_pool_timeout=300"

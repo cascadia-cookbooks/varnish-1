@@ -3,6 +3,9 @@ default['varnish']['packages'] = %w(varnish)
 # NOTE: see http://repo.varnish-cache.org/source/ for versions
 default['varnish']['version'] = '4.1.3'
 
+default['varnish']['thread_pool_min'] = 5
+default['varnish']['thread_pool_max'] = 20
+
 # default address and port to bind to
 default['varnish']['frontend']['ip']   = '127.0.0.1'
 default['varnish']['frontend']['port'] = '80'
