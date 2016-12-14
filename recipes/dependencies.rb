@@ -4,14 +4,7 @@
 # Author:: Copious Inc. <engineering@copiousinc.com>
 #
 
-case node['platform_family']
-when 'debian'
-    include_recipe 'apt::default'
-when 'rhel'
-    package 'epel-release' do
-        action :install
-    end
-end
+include_recipe 'cop_base::dependencies'
 
 node['varnish']['dependencies'].each do |p|
     package p do
