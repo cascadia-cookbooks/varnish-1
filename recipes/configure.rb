@@ -46,7 +46,7 @@ template '/etc/init.d/varnish' do
     notifies :restart, 'service[varnish]', :delayed
 end
 
-template '/etc/systemd/system/varnish.service' do
+template '/usr/lib/systemd/system/varnish.service' do
     cookbook 'cop_varnish'
     source   'varnish.service.erb'
     group    'root'
