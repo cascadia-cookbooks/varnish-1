@@ -23,7 +23,7 @@
 retval=0
 pidfile=/var/run/varnish.pid
 
-exec="/usr/local/sbin/varnishd"
+exec="<%= node['varnish']['binary_path'] %>"
 
 # TODO: fix $reload_exec
 #reload_exec="/usr/sbin/varnish_reload_vcl"

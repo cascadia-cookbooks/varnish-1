@@ -21,8 +21,8 @@ EnvironmentFile=/etc/varnish/varnish.params
 Type=forking
 PIDFile=/var/run/varnish.pid
 PrivateTmp=true
-ExecStartPre=/usr/local/sbin/varnishd -C -f $VARNISH_VCL_CONF
-ExecStart=/usr/local/sbin/varnishd \
+ExecStartPre=<%= node['varnish']['binary_path'] %> -C -f $VARNISH_VCL_CONF
+ExecStart=<%= node['varnish']['binary_path'] %> \
         -P /var/run/varnish.pid \
         -f $VARNISH_VCL_CONF \
         -a ${VARNISH_LISTEN_ADDRESS}:${VARNISH_LISTEN_PORT} \

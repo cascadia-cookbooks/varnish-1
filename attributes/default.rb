@@ -3,6 +3,8 @@ default['varnish']['packages'] = %w(varnish)
 # NOTE: see http://repo.varnish-cache.org/source/ for versions
 default['varnish']['version'] = '4.1.3'
 
+default['varnish']['binary_path'] = '/usr/local/sbin/varnishd'
+
 default['varnish']['thread_pool_min'] = 5
 default['varnish']['thread_pool_max'] = 20
 
