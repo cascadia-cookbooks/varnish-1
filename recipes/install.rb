@@ -20,7 +20,7 @@ end
 
 execute 'unpack varnish' do
     cwd     cache
-    command "gunzip #{tarball} && tar -xvf #{varnish}.tar"
+    command "gunzip #{tarball} && tar -xf #{varnish}.tar"
     not_if  "test -d #{varnish}"
 end
 
