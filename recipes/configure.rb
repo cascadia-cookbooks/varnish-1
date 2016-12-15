@@ -55,7 +55,13 @@ template '/usr/lib/systemd/system/varnish.service' do
     backup   5
     action   :create
     only_if  'ps -p 1 -o comm= | grep systemd'
+    notifies :run, 'execute[reload systemctl]', :immediately
     notifies :restart, 'service[varnish]', :delayed
+end
+
+execute 'reload systemctl' do
+    command 'systemctl daemon-reload'
+    action  :nothing
 end
 
 cookbook_file '/etc/logrotate.d/varnish' do
