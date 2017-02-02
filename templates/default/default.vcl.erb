@@ -10,7 +10,9 @@ backend default {
 }
 
 acl purge {
-
+<% node['varnish']['purge'].each do |network,netmask| -%>
+    "<%= network %>"<%= netmask != "" ? "/#{netmask.tr('/', '')}" : "" %>;
+<% end -%>
 }
 
 sub vcl_recv {
