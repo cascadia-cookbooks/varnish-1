@@ -22,6 +22,10 @@ default['varnish']['admin']['port'] = '6082'
 default['varnish']['cache']['file'] = '/var/lib/varnish/varnish_storage.bin'
 default['varnish']['cache']['size'] = '200M'
 
+default['varnish']['purge'] = {
+    "localhost"   => '',
+}
+
 case node['platform_family']
 when 'debian'
     default['varnish']['dependencies'] = %w(
