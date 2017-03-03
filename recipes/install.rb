@@ -7,7 +7,7 @@
 cache    = Chef::Config[:file_cache_path]
 varnish  = "varnish-#{node['varnish']['version']}"
 tarball  = "#{varnish}.tar.gz"
-download = "http://repo.varnish-cache.org/source/#{tarball}"
+download = "https://repo.varnish-cache.org/source/#{tarball}"
 
 remote_file 'download varnish' do
     path   "#{cache}/#{tarball}"
