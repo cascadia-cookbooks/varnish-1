@@ -23,7 +23,7 @@ default['varnish']['cache']['file'] = '/var/lib/varnish/varnish_storage.bin'
 default['varnish']['cache']['size'] = '200M'
 
 default['varnish']['purge'] = {
-    "localhost"   => '',
+    "localhost" => '',
 }
 
 case node['platform_family']

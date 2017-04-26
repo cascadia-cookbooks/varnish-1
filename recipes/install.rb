@@ -24,10 +24,18 @@ execute 'unpack varnish' do
     not_if  "test -d #{varnish}"
 end
 
+execute 'make precompile varnish' do
+    cwd         "#{cache}/#{varnish}"
+    environment ({'PATH' => '/sbin:/bin:/usr/sbin:/usr/bin'})
+    command     'sh autogen.sh; sh configure; make'
+    not_if      'which varnishd'
+end
+
 execute 'install varnish' do
-    cwd     "#{cache}/#{varnish}"
-    command './configure && make && make install'
-    not_if  'which varnishd'
+    cwd         "#{cache}/#{varnish}"
+    environment ({'PATH' => '/sbin:/bin:/usr/sbin:/usr/bin'})
+    command     'make install'
+    not_if      'which varnishd'
 end
 
 directories = %w(
