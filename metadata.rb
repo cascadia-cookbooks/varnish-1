@@ -10,8 +10,8 @@ source_url 'https://github.com/copious-cookbooks/varnish'
 issues_url 'https://github.com/copious-cookbooks/varnish/issues'
 
 supports 'ubuntu', '>= 14.04'
-supports 'debian', '>= 6'
-supports 'rhel', '>= 6'
-supports 'centos', '>= 6'
+supports 'debian', '>= 8'
+supports 'rhel', '>= 7'
+supports 'centos', '>= 7'
 
 depends 'cop_base'
