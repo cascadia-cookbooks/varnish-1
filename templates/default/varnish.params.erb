@@ -24,7 +24,12 @@ VARNISH_SECRET_FILE=/etc/varnish/secret
 #
 # NOTE: Cache file size: in bytes, optionally using k / M / G / T suffix,
 # or in percentage of available disk space using the % suffix.
+
+<% if node['varnish']['cache']['storage_backend'] == 'malloc' %>
+VARNISH_STORAGE="malloc,<%= node['varnish']['cache']['size'] %>"
+<% else %>
 VARNISH_STORAGE="file,<%= node['varnish']['cache']['file'] %>,<%= node['varnish']['cache']['size'] %>"
+<% end %>
 
 # Default TTL used when the backend does not specify one
 VARNISH_TTL=120

@@ -6,8 +6,6 @@
 
 include_recipe 'cop_base::dependencies'
 
-node['varnish']['dependencies'].each do |p|
-    package p do
-        action :install
-    end
+package node['varnish']['dependencies'] do
+    action :install
 end

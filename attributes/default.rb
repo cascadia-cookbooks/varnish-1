@@ -1,7 +1,7 @@
 default['varnish']['packages'] = %w(varnish)
 
 # NOTE: see http://repo.varnish-cache.org/source/ for versions
-default['varnish']['version'] = '4.1.3'
+default['varnish']['version'] = '5.1.2'
 
 default['varnish']['binary_path'] = '/usr/local/sbin/varnishd'
 
@@ -19,8 +19,9 @@ default['varnish']['backend']['port'] = '8080'
 default['varnish']['admin']['ip']   = '127.0.0.1'
 default['varnish']['admin']['port'] = '6082'
 
-default['varnish']['cache']['file'] = '/var/lib/varnish/varnish_storage.bin'
-default['varnish']['cache']['size'] = '200M'
+default['varnish']['cache']['storage_backend'] = 'file'
+default['varnish']['cache']['file']            = '/var/lib/varnish/varnish_storage.bin'
+default['varnish']['cache']['size']            = '200M'
 
 default['varnish']['purge'] = {
     "localhost" => '',
