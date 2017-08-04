@@ -26,14 +26,14 @@ end
 
 execute 'make precompile varnish' do
     cwd         "#{cache}/#{varnish}"
-    environment ({'PATH' => '/sbin:/bin:/usr/sbin:/usr/bin'})
+    environment ({'PATH' => '/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin'})
     command     'sh autogen.sh; sh configure; make'
     not_if      'which varnishd'
 end
 
 execute 'install varnish' do
     cwd         "#{cache}/#{varnish}"
-    environment ({'PATH' => '/sbin:/bin:/usr/sbin:/usr/bin'})
+    environment ({'PATH' => '/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin'})
     command     'make install'
     not_if      'which varnishd'
 end
