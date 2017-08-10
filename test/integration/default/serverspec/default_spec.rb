@@ -9,7 +9,7 @@ describe 'cop_varnish::default' do
   end
 
   describe command('/usr/local/sbin/varnishd -V') do
-    its(:stderr) { should match /4.1.3/ }
+    its(:stderr) { should match /5.1.2/ }
   end
 
   describe file('/etc/varnish/secret') do
