@@ -23,6 +23,7 @@ This cookbook will install and configure Varnish, a high-performance HTTP accele
 * `default['varnish']['cache']['file'] = '...'` The file Varnish will save data to. You shouldn't need to change this.
 * `default['varnish']['cache']['size'] = '200M'` The size limit of the Varnish cache file. Increase to save more data. Use a string in bytes, optionally using k / M / G / T suffix.
 * `default['varnish']['purge'] = { '192.168.0.0' => '/24' }` A list of addresses to allow purging Varnish cache. This should be an array of keys. If a network doesnt have a netmask, leave it empty.
+* `default['varnish']['bypass_urls'] = {}` Hash of URLs for which to bypass caching
 
 ## Usage
 Including the `cop_varnish` cookbook in the run_list ensures that varnish
