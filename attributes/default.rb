@@ -27,6 +27,8 @@ default['varnish']['purge'] = {
     "localhost" => '',
 }
 
+default['varnish']['bypass_url'] = {}
+
 case node['platform_family']
 when 'debian'
     default['varnish']['dependencies'] = %w(
