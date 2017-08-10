@@ -17,3 +17,8 @@ suites:
   - name: default
     run_list:
       - recipe[cop_varnish::default]
+    attributes:
+      varnish:
+        bypass_url:
+          test1: "/test1/regex.url"
+          test2: "/test2/regex.url"
