@@ -9,14 +9,7 @@ describe 'cop_varnish::default' do
   end
 
   describe command('/usr/local/sbin/varnishd -V') do
-    its(:stderr) { should match /4.1.3/ }
-  end
-
-  describe file('/etc/varnish/default.vcl') do
-    it { should be_file }
-    it { should be_owned_by 'root' }
-    it { should be_grouped_into 'root' }
-    it { should be_mode '644' }
+    its(:stderr) { should match /5.1.2/ }
   end
 
   describe file('/etc/varnish/secret') do
@@ -45,5 +38,16 @@ describe 'cop_varnish::default' do
   # varnish admin
   describe port(6082) do
     it { should be_listening.with('tcp') }
+  end
+end
+
+describe 'cop_varnish::vcl' do
+  describe file('/etc/varnish/default.vcl') do
+    it { should be_file }
+    it { should be_owned_by 'root' }
+    it { should be_grouped_into 'root' }
+    it { should be_mode '644' }
+    its(:content) { should include 'if (req.url ~ "/test1/regex.url")' }
+    its(:content) { should include 'if (req.url ~ "/test2/regex.url")' }
   end
 end
