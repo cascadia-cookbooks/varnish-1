@@ -23,6 +23,9 @@ default['varnish']['cache']['storage_backend'] = 'file'
 default['varnish']['cache']['file']            = '/var/lib/varnish/varnish_storage.bin'
 default['varnish']['cache']['size']            = '200M'
 
+# Set this cookie to bypass Varnish cache
+default['varnish']['bypass_cookie'] = 'no_cache'
+
 default['varnish']['purge'] = {
     "localhost" => '',
 }
