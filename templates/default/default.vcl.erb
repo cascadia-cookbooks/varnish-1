@@ -23,7 +23,7 @@ sub vcl_recv {
         if (!req.http.X-Magento-Tags-Pattern) {
             return (synth(400, "X-Magento-Tags-Pattern header required"));
         }
-        ban("obj.http.X-Magento-Tags ~ " + req.http.X-Magento-Tags-Pattern);
+        ban("req.http.host ~ .*");
         return (synth(200, "Purged"));
     }
 
