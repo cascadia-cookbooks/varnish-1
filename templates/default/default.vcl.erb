@@ -48,6 +48,11 @@ sub vcl_recv {
         return (pass);
     }
 
+    # Check for bypass cookie
+    if (req.http.Cookie ~ "<% node['varnish']['bypass_cookie'] %>") {
+        return (pass);
+    }
+
 <% node['varnish']['bypass_urls'].each do |name,url| -%>
     # Bypass <%= name %> at "<%= url %>"
     if (req.url ~ "<%= url %>") {
