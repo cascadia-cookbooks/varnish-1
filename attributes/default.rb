@@ -1,7 +1,7 @@
 default['varnish']['packages'] = %w(varnish)
 
-# NOTE: see http://repo.varnish-cache.org/source/ for versions
-default['varnish']['version'] = '5.1.2'
+# NOTE: See https://packagecloud.io/varnishcache for version numbers
+default['varnish']['version'] = '5'
 
 default['varnish']['binary_path'] = '/usr/local/sbin/varnishd'
 
