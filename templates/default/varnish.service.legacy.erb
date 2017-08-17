@@ -1,0 +1,40 @@
+# Chef generated file. Edits will be lost.
+# Enviroment variables may be found in /etc/varnish/varnish.params
+
+# Configuration file for Varnish Cache.
+#
+# /etc/init.d/varnish expects the variables $DAEMON_OPTS, $NFILES and $MEMLOCK
+# to be set from this shell script fragment.
+#
+# Note: If systemd is installed, this file is obsolete and ignored.  You will
+# need to copy /lib/systemd/system/varnish.service to /etc/systemd/system/ and
+# edit that file.
+
+# Should we start varnishd at boot?  Set to "no" to disable.
+START=yes
+
+# Set WARMUP_TIME to force a delay in reload-vcl between vcl.load and vcl.use
+# This is useful when backend probe definitions need some time before declaring
+# configured backends healthy, to avoid routing traffic to a non-healthy backend.
+#WARMUP_TIME=0
+
+# Maximum number of open files (for ulimit -n)
+NFILES=131072
+
+# Maximum locked memory size (for ulimit -l)
+# Used for locking the shared memory log in memory.  If you increase log size,
+# you need to increase this number as well
+MEMLOCK=82000
+
+DAEMON_OPTS="-a <%= node['varnish']['frontend']['ip'] %>:<%= node['varnish']['frontend']['port'] %> \
+             -T <%= node['varnish']['admin']['ip'] %>:<%= node['varnish']['admin']['port'] %> \
+             -f /etc/varnish/default.vcl \
+             -S /etc/varnish/secret \
+<% if node['varnish']['cache']['storage_backend'] == 'malloc' %>
+             -s malloc,<%= node['varnish']['cache']['size'] %> \
+<% else %>
+             -s file,<%= node['varnish']['cache']['file'] %>,<%= node['varnish']['cache']['size'] %> \
+<% end %>
+             -p thread_pool_min=<%= node['varnish']['thread_pool_min'] %> \
+             -p thread_pool_max=<%= node['varnish']['thread_pool_max'] %> \
+             -p thread_pool_timeout=300"
