@@ -1,0 +1,20 @@
+# Chef generated file. Edits will be lost.
+# Enviroment variables may be found in /etc/varnish/varnish.params
+
+[Service]
+ExecStart=
+ExecStart=/usr/sbin/varnishd \
+        -P /var/run/varnish.pid \
+        -f /etc/varnish/default.vcl \
+        -a <%= node['varnish']['frontend']['ip'] %>:<%= node['varnish']['frontend']['port'] %> \
+        -T <%= node['varnish']['admin']['ip'] %>:<%= node['varnish']['admin']['port'] %> \
+        -t 120 \
+        -S /etc/varnish/secret \
+<% if node['varnish']['cache']['storage_backend'] == 'malloc' %>
+        -s malloc,<%= node['varnish']['cache']['size'] %> \
+<% else %>
+        -s file,<%= node['varnish']['cache']['file'] %>,<%= node['varnish']['cache']['size'] %> \
+<% end %>
+        -p thread_pool_min=<%= node['varnish']['thread_pool_min'] %> \
+        -p thread_pool_max=<%= node['varnish']['thread_pool_max'] %> \
+        -p thread_pool_timeout=300

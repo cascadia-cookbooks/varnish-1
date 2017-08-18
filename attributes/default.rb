@@ -1,7 +1,7 @@
 default['varnish']['packages'] = %w(varnish)
 
-# NOTE: see http://repo.varnish-cache.org/source/ for versions
-default['varnish']['version'] = '5.1.2'
+# NOTE: See https://packagecloud.io/varnishcache for version numbers
+default['varnish']['version'] = '5'
 
 default['varnish']['binary_path'] = '/usr/local/sbin/varnishd'
 
@@ -26,6 +26,7 @@ default['varnish']['cache']['size']            = '200M'
 # Set this cookie to bypass Varnish cache
 default['varnish']['bypass_cookie'] = 'no_cache'
 
+default['varnish']['cache_purge_pattern'] = "req.http.host ~ .*"
 default['varnish']['purge'] = {
     "localhost" => '',
 }

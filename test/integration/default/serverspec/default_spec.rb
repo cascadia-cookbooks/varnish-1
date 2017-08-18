@@ -1,15 +1,12 @@
 require 'spec_helper'
 
 describe 'cop_varnish::default' do
-  describe file('/usr/local/sbin/varnishd') do
-    it { should be_executable }
-    it { should be_file }
-    it { should be_owned_by 'root' }
-    it { should be_mode '755' }
+  describe package('varnish') do
+    it { should be_installed }
   end
 
-  describe command('/usr/local/sbin/varnishd -V') do
-    its(:stderr) { should match /5.1.2/ }
+  describe command('varnishd -V') do
+    its(:stderr) { should include "5" }
   end
 
   describe file('/etc/varnish/secret') do

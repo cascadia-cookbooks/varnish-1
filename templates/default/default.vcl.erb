@@ -23,7 +23,7 @@ sub vcl_recv {
         if (!req.http.X-Magento-Tags-Pattern) {
             return (synth(400, "X-Magento-Tags-Pattern header required"));
         }
-        ban("req.http.host ~ .*");
+        ban("<%= node['varnish']['cache_purge_pattern'] %>");
         return (synth(200, "Purged"));
     }
 
