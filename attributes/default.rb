@@ -26,7 +26,7 @@ default['varnish']['cache']['size']            = '200M'
 # Set this cookie to bypass Varnish cache
 default['varnish']['bypass_cookie'] = 'no_cache'
 
-default['varnish']['cache_purge_pattern'] = "req.http.host ~ .*"
+default['varnish']['cache_purge_pattern'] = '"req.http.host ~ .*"'
 default['varnish']['purge'] = {
     "localhost" => '',
 }
