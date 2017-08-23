@@ -15,6 +15,7 @@ default['varnish']['frontend']['port'] = '80'
 # set this to point to your content server
 default['varnish']['backend']['ip']   = '127.0.0.1'
 default['varnish']['backend']['port'] = '8080'
+default['varnish']['backend']['first_byte_timeout'] = '60s'
 
 default['varnish']['admin']['ip']   = '127.0.0.1'
 default['varnish']['admin']['port'] = '6082'
