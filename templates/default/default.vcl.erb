@@ -7,7 +7,7 @@ import std;
 backend default {
     .host = "<%= node['varnish']['backend']['ip'] %>";
     .port = "<%= node['varnish']['backend']['port'] %>";
-    .first_byte_timeout = "<%= node['varnish']['backend']['first_byte_timeout'] %>";
+    .first_byte_timeout = <%= node['varnish']['backend']['first_byte_timeout'] %>;
 }
 
 acl purge {
